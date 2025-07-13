@@ -48,7 +48,7 @@ export function HomePage() {
                         <div className="container">
                             <SearchBar search={search} setSearch={setSearch} />
                             <FilterSidebar filter={filter} setFilter={setFilter} />
-                            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                                 {error && <p className="text-red-500 mb-4">{error}</p>}
                                 {filteredProducts.map((p) => (
                                     <ProductCard
