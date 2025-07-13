@@ -7,6 +7,7 @@ import { Footer } from './components/Footer';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 import { ViewHistoryProvider } from './contexts/ViewHistoryContext';
 import { ViewHistoryPage } from './pages/ViewHistoryPage';
+import ChatbotAI from './components/ChatbotAI';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/favorites" element={<FavoritesPage />} />
                 <Route path="/histories" element={<ViewHistoryPage />} />
+                <Route path="/ChatbotAI" element={<ChatbotAI />} />
               </Routes>
             </main>
             <Footer />

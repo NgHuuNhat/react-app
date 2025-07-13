@@ -4,6 +4,7 @@ import {
     HomeOutlined,
     HeartOutlined,
     HistoryOutlined,
+    MessageOutlined,
 } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -28,10 +29,15 @@ export default function Header() {
             icon: <HistoryOutlined />,
             label: 'Lịch sử xem',
         },
+        {
+            to: '/ChatbotAI',
+            icon: <MessageOutlined />,
+            label: 'Chatbot AI',
+        },
     ];
 
     return (
-        <nav className="p-1 shadow sticky top-0 z-50 bg-white">
+        <nav className="p-2 shadow sticky top-0 z-50 bg-white">
             <div className="container flex justify-center gap-10">
                 {menuItems.map((item) => {
                     const isActive = location.pathname === item.to;
