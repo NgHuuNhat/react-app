@@ -1,62 +1,51 @@
 import { Button, Space } from 'antd';
+import { getSuggestions } from '../api/suggestionApi';
+import { Product } from '../types/Product';
 
 interface Props {
   filter: 'all' | '<500' | '500-1000' | '>1000';
   setFilter: (value: 'all' | '<500' | '500-1000' | '>1000') => void;
+  setProducts: (value: Product[]) => void;
+  setIsSuggestion: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuggestedProducts: (value: Product[]) => void;
 }
 
-export function FilterSidebar({ filter, setFilter }: Props) {
+const FILTER_OPTIONS = [
+  { label: 'Tất cả', value: 'all' },
+  { label: '< 500k', value: '<500' },
+  { label: '500k - 1tr', value: '500-1000' },
+  { label: '> 1tr', value: '>1000' },
+] as const;
+
+export function FilterSidebar({ filter, setFilter, setIsSuggestion, setSuggestedProducts }: Props) {
   return (
-    <div className="">
+    <div>
       <Space wrap size={[12, 12]}>
-        <Button
-          onClick={() => setFilter('all')}
-          style={{
-            backgroundColor: filter === 'all' ? 'black' : undefined,
-            color: filter === 'all' ? 'white' : undefined,
-            borderColor: filter === 'all' ? 'black' : undefined,
-          }}
-          className="no-outline"
-        >
-          Tất cả
-        </Button>
-        <Button
-          onClick={() => setFilter('<500')}
-          style={{
-            backgroundColor: filter === '<500' ? 'black' : undefined,
-            color: filter === '<500' ? 'white' : undefined,
-            borderColor: filter === '<500' ? 'black' : undefined,
-          }}
-          className="no-outline"
-        >
-          {'< 500k'}
-        </Button>
-        <Button
-          onClick={() => setFilter('500-1000')}
-          style={{
-            backgroundColor: filter === '500-1000' ? 'black' : undefined,
-            color: filter === '500-1000' ? 'white' : undefined,
-            borderColor: filter === '500-1000' ? 'black' : undefined,
-          }}
-          className="no-outline"
-        >
-          500k - 1tr
-        </Button>
-        <Button
-          onClick={() => setFilter('>1000')}
-          style={{
-            backgroundColor: filter === '>1000' ? 'black' : undefined,
-            color: filter === '>1000' ? 'white' : undefined,
-            borderColor: filter === '>1000' ? 'black' : undefined,
-          }}
-          className="no-outline"
-        >
-          {'> 1tr'}
-        </Button>
+        {FILTER_OPTIONS.map(({ label, value }) => (
+          <Button
+            key={value}
+            onClick={() => {
+              setFilter(value);
+              setIsSuggestion(false);
+            }}
+            style={{
+              backgroundColor: filter === value ? 'black' : undefined,
+              color: filter === value ? 'white' : undefined,
+              borderColor: filter === value ? 'black' : undefined,
+            }}
+            className="no-outline"
+          >
+            {label}
+          </Button>
+        ))}
         <Button
           type="dashed"
-          onClick={() => alert('Đang gợi ý sản phẩm phù hợp...')}
           className="no-outline"
+          onClick={async () => {
+            const result = await getSuggestions('xxx');
+            setSuggestedProducts(result);
+            setIsSuggestion(true);
+          }}
         >
           🧠 Gợi ý phù hợp
         </Button>

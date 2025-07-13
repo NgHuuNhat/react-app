@@ -5,13 +5,13 @@ import { HeartFilled, HeartOutlined, SearchOutlined, ShoppingCartOutlined } from
 
 interface Props {
     product: Product;
-    onSelect: () => void;
     onToggleFavorite: () => void;
     isLoading: boolean;
     isFavorite: boolean;
+    onHistory: () => void;
 }
 
-export function ProductCard({ product, onSelect, onToggleFavorite, isLoading, isFavorite }: Props) {
+export function ProductCard({ product, onToggleFavorite, isLoading, isFavorite, onHistory }: Props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => {
@@ -38,7 +38,10 @@ export function ProductCard({ product, onSelect, onToggleFavorite, isLoading, is
                         className="no-outline"
                         key="detail"
                         type="default"
-                        onClick={showModal}
+                        onClick={() => {
+                            showModal();
+                            onHistory();
+                        }}
                         style={{ borderRadius: '9999px' }}
                         icon={<SearchOutlined />}
                     >
