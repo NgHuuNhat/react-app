@@ -31,7 +31,7 @@ export default function Header() {
     ];
 
     return (
-        <nav className="p-3 shadow sticky top-0 z-50 bg-white">
+        <nav className="p-1 shadow sticky top-0 z-50 bg-white">
             <div className="container flex justify-center gap-10">
                 {menuItems.map((item) => {
                     const isActive = location.pathname === item.to;
